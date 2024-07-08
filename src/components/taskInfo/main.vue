@@ -1,0 +1,119 @@
+<template>
+    <el-row >
+        <el-button type="primary" style="margin:0 0 0 20px;" @click="addTask">
+            添加任务
+        </el-button>
+    </el-row>
+    <el-row style="margin:20px">
+        <el-table :data="tableData" style="width: 100%">
+            <el-table-column prop="taskName" label="任务名称" width="180" />
+            <el-table-column prop="createDate" label="创建日期" width="180" />
+            <el-table-column prop="name" label="创建者" width="180" />
+            <el-table-column prop="content" label="内容" />
+            <el-table-column prop="startTime" label="开始日期" />
+            <el-table-column prop="endTime" label="结束日期" />
+            <el-table-column prop="notes" label="备注" />
+            <el-table-column fixed="right" label="操作" >
+                <template #default>
+                    <el-button link type="primary" size="small" @click="checkTaskInfo">
+                        任务详情
+                    </el-button>
+                    <el-button link type="primary" size="small" @click="changeTaskInfo">修改</el-button>
+                </template>
+            </el-table-column>
+
+        </el-table>
+    </el-row>
+    <el-dialog 
+        v-model="dialogVisible"
+        :title="dialogTitle"
+        width="500"
+        :before-close="handleClose">
+        <el-form>
+            <!-- <> -->
+            <el-button type="primary" @click="closeDialog">关闭</el-button>
+            <el-button type="primary" @click="saveDialog">保存</el-button>
+        </el-form>
+    </el-dialog>
+</template>
+
+<script>
+import { ref } from 'vue'
+export default {
+    setup: function(){
+        let tableData = ref([
+            {
+                taskName:'1',
+                createDate:'',
+                creater:'',
+                content:'',
+                startTime:'',
+                endTime:'',
+                notes:''
+            },
+            {
+                taskName:'2',
+                createDate:'',
+                creater:'',
+                content:'',
+                startTime:'',
+                endTime:'',
+                notes:''
+            }
+        ])
+        let dialogVisible = ref(false)
+        
+        let dialogTitle = ref('')
+        //查询表格
+        const searchTableData = () =>{
+
+        }
+
+        //添加任务
+        const addTask = () =>{
+            dialogVisible.value = true
+            dialogTitle.value = '添加任务'
+        }
+
+        //关闭窗口
+        const closeDialog = ()=>{
+            //清空form
+            dialogVisible.value = false
+        }
+
+        //保存任务详情
+        const saveDialog = ()=>{
+            
+            //接口
+            dialogVisible.value = false
+        }
+
+        //查看详情
+        const checkTaskInfo = () =>{
+            dialogTitle.value = '任务详情'
+        }
+
+        //修改任务
+        const changeTaskInfo = () =>{
+            dialogTitle.value = '修改任务'
+        }
+
+        return{
+            tableData,
+            dialogTitle,
+            dialogVisible,
+            searchTableData,
+            addTask,
+
+            closeDialog,
+            saveDialog,
+            checkTaskInfo,
+            changeTaskInfo
+        }
+    }
+}
+</script>
+
+<style>
+
+</style>

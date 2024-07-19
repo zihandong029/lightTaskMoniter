@@ -1,13 +1,15 @@
-
-
-
-
 <template>
-  <v-stage ref="stage" :config="stageConfig" @mousedown="startDrawing" @mouseup="stopDrawing" @mousemove="draw" style="background-color: white">
-    <v-layer ref="layer" style="background-color: white">
+  <v-stage ref="stage" :config="stageConfig" @mousedown="startDrawing" @mouseup="stopDrawing" @mousemove="draw" >
+    <v-layer ref="layer" >
       <v-line v-for="line in lines" :key="line.id" :config="line" />
+      <v-rect v-for="item in colorList" :key="item.fill"
+          :config="item" 
+          @click="handleButtonClick"
+        />
     </v-layer>
+    
   </v-stage>
+  
 </template>
 
 <script>
@@ -31,7 +33,7 @@ export default {
     const startDrawing = (event) => {
       isDrawing.value = true;
       const pos = event.target.getStage().getPointerPosition();
-      lines.value.push({ points: [pos.x, pos.y], stroke: 'black', strokeWidth: 5, tension: 0.5, lineCap: 'round' });
+      lines.value.push({ points: [pos.x, pos.y], stroke: drawColor, strokeWidth: 5, tension: 0.5, lineCap: 'round' });
     };
 
     const stopDrawing = () => {
@@ -56,12 +58,38 @@ export default {
       });
     });
 
+    //尝试加按钮
+    const colors = ['white', 'black', 'blue', 'yellow', 'red'];
+
+    const colorList = colors.map((color, index) => ({
+        x: 50 + index * 120,  // 每个矩形在 x 轴上分开一些距离
+        y: 50,
+        width: 100,
+        height: 40,
+        fill: color,
+        cornerRadius: 10,
+        stroke: 'black',
+        strokeWidth: 2
+    }));
+
+    const handleButtonClick = (e) => {
+      // alert('Button clicked!');
+      console.log(e.target.attrs.fill)
+      drawColor = e.target.attrs.fill
+    };
+
+    let drawColor = ref('white')
     return {
       stageConfig,
       lines,
       startDrawing,
       stopDrawing,
       draw,
+      //
+      colorList,
+      handleButtonClick,
+      //画笔颜色
+      drawColor
     };
   },
 };

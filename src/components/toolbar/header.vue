@@ -2,12 +2,12 @@
   <div style="width:100%">
     <el-menu
       :default-active="activeIndex"
-      class="el-menu-demo"
       mode="horizontal"
       background-color="#545c64"
       text-color="#fff"
       active-text-color="#ffd04b"
       @select="handleSelect"
+      class="menu"
     >
       <el-menu-item index="myTask">我的任务</el-menu-item>
       <el-menu-item index="createTask">创建任务</el-menu-item>
@@ -17,6 +17,9 @@
         <el-menu-item index="4-1">人员角色</el-menu-item>
         <el-menu-item index="4-2">人员联动</el-menu-item>
       </el-sub-menu>
+      
+      <el-menu-item class="right-menu" index="myInfo">我的信息</el-menu-item>
+
     </el-menu>
   </div>
 </template>
@@ -47,3 +50,15 @@ export default {
 }
 
 </script>
+<style scoped>
+.menu {
+  display: flex;
+  justify-content:start;
+  width: 100%;
+}
+
+.right-menu {
+
+  margin-left: auto;
+}
+</style>

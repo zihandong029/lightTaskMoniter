@@ -1,7 +1,7 @@
 <template>
   <div >
     <el-container>
-      <el-header class="topBar">
+      <el-header v-if="!isLoginOrRegisterPage" class="topBar">
         <MenuBar/>
       </el-header>
       <el-main class="mainArea">
@@ -14,8 +14,8 @@
 
 <script>
 import MenuBar from './components/toolbar/header.vue'
-
-import { ref } from 'vue';
+import { useRoute } from 'vue-router';
+import { ref, computed } from 'vue';
 
 export default {
   components: {
@@ -28,10 +28,12 @@ export default {
   //   }
   // },
   setup(){
+    const route = useRoute();
+    const isLoginOrRegisterPage = computed(() => route.path === '/login' || route.path === '/register');
 
     return {
-      
-    }
+      isLoginOrRegisterPage
+    };
   }
 };
 </script>

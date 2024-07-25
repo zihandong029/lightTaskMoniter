@@ -16,6 +16,10 @@ import VueKonva from 'vue-konva';
 
 app.use(VueKonva);
 
+//pinia
+import { createPinia } from 'pinia';
+const pinia = createPinia();
+app.use(pinia);
 
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'

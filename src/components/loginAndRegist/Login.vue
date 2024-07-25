@@ -21,9 +21,9 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import { ElForm } from 'element-plus';
-import { login } from '../services/authService';
+import { login } from '../../services/authService';
 import { useRouter } from 'vue-router';
-
+import { currentUser } from '../../stores/index';
 export default defineComponent({
   name: 'Login',
   setup() {
@@ -35,6 +35,8 @@ export default defineComponent({
     const router = useRouter();
     const loginFormRef = ref<InstanceType<typeof ElForm> | null>(null);
 
+    const user = currentUser()
+    
     const handleSubmit = async () => {
       const valid = await loginFormRef.value?.validate();
       if (valid) {
@@ -44,6 +46,8 @@ export default defineComponent({
           if (response.token) {
             localStorage.setItem('token', response.token);
             alert('登录成功');
+            //当前登陆人
+            user.setUser(loginForm.value.username)
             router.push('/myTask');
           } else {
             throw new Error(response.message || '登录失败');

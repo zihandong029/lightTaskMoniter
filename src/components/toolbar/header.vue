@@ -14,7 +14,7 @@
       <el-menu-item index="3">dashboard</el-menu-item>
       <el-sub-menu index="4">
         <template #title>次要模块</template>
-        <el-menu-item index="4-1">人员角色</el-menu-item>
+        <el-menu-item index="allUser">人员角色</el-menu-item>
         <el-menu-item index="4-2">人员联动</el-menu-item>
       </el-sub-menu>
       

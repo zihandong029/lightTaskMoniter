@@ -3,9 +3,10 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 import MyCanv from '../components/canvas/Canvas.vue'
 import TaskInfo from '../components/taskInfo/main.vue'
-import Login from '../components/Login.vue';
-import Register from '../components/Register.vue'
+import Login from '../components/loginAndRegist/Login.vue';
+import Register from '../components/loginAndRegist/Register.vue'
 import myInfo from '../components/userInfo/userInfo.vue'
+import allUser from '../components/secondary/Alluser.vue'
 
 const routes = [
     {
@@ -34,6 +35,11 @@ const routes = [
         path: '/myInfo', 
         name: 'myInfo',
         component: myInfo
+    },
+    {
+        path: '/allUser', 
+        name: 'allUser',
+        component: allUser
     }
 ];
 
